@@ -7,7 +7,7 @@
 enum GameState{
     MENU,
     INPUT_NAME,
-    PALYING,
+    PLAYING,
     GAME_OVER,
     LEADERBOARD
 };
