@@ -1,0 +1,11 @@
+# Build output
+build/
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# Windows
+Thumbs.db
+Desktop.ini
