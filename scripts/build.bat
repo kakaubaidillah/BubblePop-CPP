@@ -10,6 +10,7 @@ src\game.cpp ^
 src\menu.cpp ^
 src\input.cpp ^
 src\gameover.cpp ^
+src\leaderboard.cpp ^
 -I"C:\raylib\raylib\src" ^
 -L"C:\raylib\raylib\src" ^
 -lraylib -lgdi32 -lwinmm -lopengl32 ^
