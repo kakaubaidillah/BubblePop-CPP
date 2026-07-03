@@ -1,12 +1,12 @@
 #include "menu.h"
 
-void drawMenu()
+void drawMenu(int selected)
 {
     DrawText("BUBBLE POP", 250, 120, 50, BLUE);
 
-    DrawText("PLAY",         330, 250, 30, WHITE);
-    DrawText("LEADERBOARD",  270, 300, 30, WHITE);
-    DrawText("EXIT",         335, 350, 30, WHITE);
+    DrawText(selected == 0 ? "> PLAY" : " PLAY", 300, 250, 30, WHITE);
+    DrawText(selected == 1 ? "> LEADERBOARD" : " LEADERBOARD",  270, 300, 30, WHITE);
+    DrawText(selected == 2 ? "> EXIT" : " EXIT", 335, 350, 30, WHITE);
 }
 
 void updateMenu(int &selected, bool &enterPressed)

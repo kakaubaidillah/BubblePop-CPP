@@ -10,14 +10,17 @@ void updateInputName(char name[], int &letterCount, bool &finishInput){
             letterCount++;
             name[letterCount] = '\0';
         }
-        if(IsKeyPressed(KEY_BACKSPACE) && letterCount > 0){
+        key = GetCharPressed();
+    }
+        
+    if(IsKeyPressed(KEY_BACKSPACE) && letterCount > 0){
             letterCount--;
             name[letterCount] = '\0';
-        }
-        if(IsKeyPressed(KEY_ENTER) && letterCount > 0){
-            finishInput = true;
-        }
     }
+    if(IsKeyPressed(KEY_ENTER) && letterCount > 0){
+            finishInput = true;
+    }
+    
 }
 
 void drawInputName(char name[]){

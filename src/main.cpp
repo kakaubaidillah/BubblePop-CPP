@@ -4,6 +4,7 @@
 #include "game.h"
 #include "menu.h"
 #include "input.h"
+#include "gameover.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -20,7 +21,7 @@ int main()
     int currentBubble = 5;
     int score = 0;
     int level = 1;
-    float timer = 60.0f;
+    float timer = 120.0f;
     // Menu
     GameState gameState = MENU;
     int selected = 0;
@@ -85,7 +86,7 @@ int main()
             BeginDrawing();
 
             ClearBackground(BLACK);
-            drawMenu();
+            drawMenu(selected);
 
             EndDrawing();
             break;
@@ -106,6 +107,10 @@ int main()
 
             if(finishInput)
             {
+                resetGame(bubbles, currentBubble, score, level, timer);
+
+                finishInput = false;
+
                 gameState = PLAYING;
             }
 
@@ -114,11 +119,14 @@ int main()
 
         case PLAYING:
         {
-            // INI GAME KAMU YANG LAMA
-
             updateTimer(timer);
 
-            updateLevel(timer, level, currentBubble, bubbles);
+            if(timer <= 0){
+                gameState = GAME_OVER;
+                break;
+            }
+
+            updateLevel(score, level, currentBubble, bubbles);
 
             updateBubbles(bubbles, currentBubble);
 
@@ -139,7 +147,20 @@ int main()
 
         case GAME_OVER:
         {
-            // nanti
+            updateGameOver(enterPressed);
+
+            if(enterPressed){
+                gameState = MENU;
+                enterPressed = false;
+            }
+
+            BeginDrawing();
+
+            ClearBackground(BLACK);
+
+            drawGameOver(playerName, score);
+
+            EndDrawing();
             break;
         }
 

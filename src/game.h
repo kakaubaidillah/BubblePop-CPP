@@ -12,5 +12,6 @@ enum GameState{
     LEADERBOARD
 };
 
-void updateLevel(float &timer, int &level, int &currentBubble, bubble bubbles[]);
+void updateLevel(int score, int &level, int &currentBubble, bubble bubbles[]);
 void updateTimer(float &timer);
+void resetGame(bubble bubbles[], int &currentBubble, int &score, int &level, float &timer);

@@ -2,5 +2,5 @@
 
 #include "raylib.h"
 
-void drawMenu();
+void drawMenu(int selected);
 void updateMenu(int &selected, bool &enterPressed);
