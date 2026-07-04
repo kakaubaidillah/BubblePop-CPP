@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "input.h"
 #include "gameover.h"
+#include "leaderboard.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -31,6 +32,12 @@ int main()
     char playerName[21] = "";
     int letterCount = 0;
     bool finishInput = false;
+
+    // Leaderboard
+    LeaderboardData leaderboard[MAX_LEADERBOARD];
+    int totalPlayer = loadLeaderboard(leaderboard);
+    sortLeaderboard(leaderboard, totalPlayer);
+    bool backToMenu = false;
 
     Texture2D background = LoadTexture("assets/bg02.png");
     if (background.id == 0)
@@ -104,8 +111,7 @@ int main()
 
             EndDrawing();
 
-
-            if(finishInput)
+            if (finishInput)
             {
                 resetGame(bubbles, currentBubble, score, level, timer);
 
@@ -121,7 +127,8 @@ int main()
         {
             updateTimer(timer);
 
-            if(timer <= 0){
+            if (timer <= 0)
+            {
                 gameState = GAME_OVER;
                 break;
             }
@@ -149,7 +156,9 @@ int main()
         {
             updateGameOver(enterPressed);
 
-            if(enterPressed){
+            if (enterPressed)
+            {
+                saveScore(playerName, score);
                 gameState = MENU;
                 enterPressed = false;
             }
@@ -166,7 +175,23 @@ int main()
 
         case LEADERBOARD:
         {
-            // nanti
+            totalPlayer = loadLeaderboard(leaderboard);
+            sortLeaderboard(leaderboard, totalPlayer);
+            updateLeaderboard(backToMenu);
+
+            if (backToMenu)
+            {
+                gameState = MENU;
+            }
+
+            BeginDrawing();
+
+            ClearBackground(BLACK);
+
+            drawLeaderboard(leaderboard, totalPlayer);
+
+            EndDrawing();
+
             break;
         }
         }
